@@ -21,9 +21,7 @@ shinyUI(fluidPage(
       h4("You entered:"),
       verbatimTextOutput("oTextVal"),
       h4("The word predicted is:"),
-      verbatimTextOutput("oPredictedWord"),
-      h4("This is the probability distribution of words")
-      # insert chart here
+      verbatimTextOutput("oPredictedWord")
     )
   )
 ))
