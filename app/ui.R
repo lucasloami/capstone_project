@@ -4,21 +4,26 @@ library(shiny)
 shinyUI(fluidPage(
 
   # Application title
-  titlePanel("Hello Shiny!"),
+  titlePanel("Capstone project - Data Science Specialization"),
 
   # Sidebar with a slider input for the number of bins
   sidebarLayout(
     sidebarPanel(
-      sliderInput("bins",
-                  "Number of bins:",
-                  min = 1,
-                  max = 50,
-                  value = 30)
+      p("This application predict the next word the user would write in the text. To use it, just type your text in the box below and hit the 'Predict' button."), 
+      p("The app uses a ngram language model based in a corpus composed by blogs' texts, tweets and news' texts. For this project, I used unigrams, bigrams, trigrams and 4-grams and their frequencies to build a dataframe."),
+      p("Moreover, this app uses 'stupid backoff' in its predictions."), 
+      textInput('iTextVal', 'Insert your text here', ""),
+      submitButton("Predict")
     ),
 
     # Show a plot of the generated distribution
     mainPanel(
-      plotOutput("distPlot")
+      h4("You entered:"),
+      verbatimTextOutput("oTextVal"),
+      h4("The word predicted is:"),
+      verbatimTextOutput("oPredictedWord"),
+      h4("This is the probability distribution of words")
+      # insert chart here
     )
   )
 ))
