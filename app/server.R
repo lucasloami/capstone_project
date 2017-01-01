@@ -1,8 +1,18 @@
 library(shiny)
 
+
+source("prediction.R", local=TRUE)
+
+predict <- function(input) {
+  if(input == "")
+    res <- ""
+  else
+    res <- "love"
+  return(res)
+}
+
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
-
   # Expression that generates a histogram. The expression is
   # wrapped in a call to renderPlot to indicate that:
   #
@@ -10,11 +20,14 @@ shinyServer(function(input, output) {
   #     when inputs change
   #  2) Its output type is a plot
 
-  output$distPlot <- renderPlot({
-    x    <- faithful[, 2]  # Old Faithful Geyser data
-    bins <- seq(min(x), max(x), length.out = input$bins + 1)
+  # output$distPlot <- renderPlot({
+  #   x    <- faithful[, 2]  # Old Faithful Geyser data
+  #   bins <- seq(min(x), max(x), length.out = input$bins + 1)
 
-    # draw the histogram with the specified number of bins
-    hist(x, breaks = bins, col = 'darkgray', border = 'white')
-  })
+  #   # draw the histogram with the specified number of bins
+  #   hist(x, breaks = bins, col = 'darkgray', border = 'white')
+  # }),
+
+  output$oTextVal <- renderPrint({input$iTextVal})
+  output$oPredictedWord <- renderPrint({predictNextWord(input$iTextVal)})
 })
